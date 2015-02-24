@@ -20,7 +20,7 @@ JavaScript programmers are used to installing methods on objects by simply assig
 ```js
 someObject.push = MyArray.prototype.push;
 ```
-But, become of the [[HomeObject]] method association this usually will not have the intended result. For example, consider:
+But, because of the [[HomeObject]] method association this usually will not have the intended result. For example, consider:
 ```js
 //Example 1
 class Pusher {
@@ -72,7 +72,7 @@ Instead, `toMethod` makes an almost clone of the function that is its `this` val
 
 However, cloning a function creates other complications. Is the clone a deep or shallow clone? In either case are all of the functions properties cloned or only some of them.  If the function itself has function valued properties should `toMethod` be recursively applied to them with the clone as the argument?  What happens if `toMethod` is applied to a built-in function, a bound function, or a callable Proxy object. Is it expected to also know how to clone those?
 
-The answer used in the ES6 draft version of `toMethod` was to perform a shallow clone of the function excluding  all own properties except for `length`. If any other properties needed to be included in the clone (either shallowly or deeply) it was up to caller to `toMethod` to take care of that copying after `toMethod` returned the clone to it. For this reason, the ES6 draft `toMethod` was best thought of as a primitive that was intended to be primarily used  by mix-in libraries or other abstractions over objects.  Such libraries  would have needed to establish their own policies for dealing with the cloning issue and for dealing with various kinds of exotic function objects.
+The answer used in the ES6 draft version of `toMethod` was to perform a shallow clone of the function excluding  all own properties except for `length`. If any other properties needed to be included in the clone (either shallowly or deeply) it was up to caller to `toMethod` to take care of that copying after `toMethod` returned the clone to it. For this reason, the ES6 draft `toMethod` was best thought of as a primitive that was intended to be primarily used by mix-in libraries or other abstractions over objects.  Such libraries  would have needed to establish their own policies for dealing with the cloning issue and for dealing with various kinds of exotic function objects.
 
 Ultimately, TC39 decided that `toMethod` was too complex and error-prone.
 ### Declarative Is Better 
@@ -155,7 +155,7 @@ In the above example the augmented object is the class constructor `C` so `m2` w
 
 While this could be what somebody who wrote `C mixin {...}` intended, it probably isn't.  More likely, when extending a class object, a developer really wants to default to adding properties to the class' prototype object and if they want to add `static` methods they would prefer to label them as such.
 
-There are other annoyances with using `mixin {...}` to augment class  constructor objects.  One is that the value of the [[Enumerable]] attribute that is set by an _ObjectLiteral_ is the opposite value from what is set for method definitions in a _ClassBody_.  More generally when extending a class constructor you would like to be able to use _ClassBody_ syntax and semantics rather than _ObjectLiteral_ syntax and semantics.  This is already an issue for `static` methods. In the future it is  likely that other kinds of `ClassBody` elements will be added to ECMAScript and  probably  at least some of those should be available when augmenting a class constructor using the `mixin` operator.
+There are other annoyances with using `mixin {...}` to augment class constructor objects.  One is that the value of the [[Enumerable]] attribute that is set by an _ObjectLiteral_ is the opposite value from what is set for method definitions in a _ClassBody_.  More generally when extending a class constructor you would like to be able to use _ClassBody_ syntax and semantics rather than _ObjectLiteral_ syntax and semantics.  This is already an issue for `static` methods. In the future it is  likely that other kinds of `ClassBody` elements will be added to ECMAScript and  probably  at least some of those should be available when augmenting a class constructor using the `mixin` operator.
 
 We can address these issues by providing a second form of the `mixin` operator that is specifically defined for augmenting constructor objects. The simplified syntactic description of  this alternative `mixin` form is:  
         _MixinExpression_ : _MixinExpression_ `mixin class { ` _ClassBody_ `}`   
@@ -178,7 +178,7 @@ C mixin class {
 }
 ```
 ###None Goals
-This proposal is not intended to be a replacement for higher level  class composition abstractions such as Traits.  Instead it provides the essential primitive language capabilities which combined with procedural or object abstraction capabilities can be used to define such higher level compositional abstractions.
+This proposal is not intended to be a replacement for higher level class composition abstractions such as Traits.  Instead it provides the essential primitive language capabilities which combined with procedural or object abstraction capabilities can be used to define such higher level compositional abstractions.
 ###BNF
 
 Here is the proposed BNF for this extension.
