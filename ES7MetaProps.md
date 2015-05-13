@@ -43,15 +43,6 @@ Referencing `function.arguments` outside of function code is a Syntax Error.
 #####Use Cases
 `function.arguments` is essentially a replacement for the legacy `arguments` object that doesn't carry any of the baggage of `arguments` and which can be used with all function forms including Arrow Functions and in all modes.  Uses include declaring a function with a  meaningful parameter signature while still having the original arguments available if an overload conditions requires delegation of the arguments to another function.. 
 
-####`function.next` -- Current yield result
-#####Value and Context
-The value of `function.next` within the body of a Generator Function is the value passed to the generator by the `next` method that most recently resumed execution of the generator.  In particular,  referencing `function.next` prior to the first evaluation of a `yield` operator returns the argument value passed by the `next` call that started evaluation of the *GeneratorBody*. 
 
-`function.next` is  lexically scoped like `this` so it can be referenced from within an  Arrow Functions contained within a *GeneratorBody*.
-
-Referencing `function.next` outside of a *GeneratorBody*  or an Arrow Function contained in a *GeneratorBody* is a Syntax Error
-
-#####Use Cases
-The primary use case is to access the "start value" that is  passed into a generator as the argument of the `next` method that initiates its evaluation. 
 #### Module Meta Data
 Meta Properties may be useful for providing access to various meta data associated with a module.  If desired, proposals for such properties need to be added here by the module champions. 
