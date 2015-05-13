@@ -89,7 +89,7 @@ The following row is added to **Table 24**:<br>
 *FunctionNext* &nbsp;: <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**new . target**
 #### 14.4.14 Evaluation
-*FunctionNext*&nbsp;:&nbsp;**new . target **<br>
+*FunctionNext*&nbsp;:&nbsp;**new . target**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;&nbsp;Assert:  the running execution context is a Generator Context.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;&nbsp;Let *genContext* be the running execution context.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;3.&nbsp;&nbsp;Return the value of the LastYieldValue component of *genContext* .<br>
