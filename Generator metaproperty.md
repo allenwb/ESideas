@@ -74,24 +74,24 @@ The following row is added to **Table 24**:
 #### 12.3 Left-Hand-Side Expression
 ##### Syntax
 
-*MemberExpression*<sub>[Yield]</sub> &nbsp;: 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*MetaProperty*<sub>[?Yield]</sub>
+*MemberExpression*<sub>[Yield]</sub> &nbsp;:  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;... <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*MetaProperty*<sub>[?Yield]</sub> <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...
 
-*MetaProperty*<sub>[Yield]</sub> &nbsp;: 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*NewTarget*
+*MetaProperty*<sub>[Yield]</sub> &nbsp;:  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*NewTarget* <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [+Yield] *FunctionNext*
 
 #### 14.4 Generator Function Definitions
 ##### Syntax
-*FunctionNext* &nbsp;: 
+*FunctionNext* &nbsp;: <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**new . target**
 #### 14.4.14 Evaluation
-*FunctionNext*&nbsp;:&nbsp;**new . target **
-&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;&nbsp;Assert:  the running execution context is a Generator Context.
-&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;&nbsp;Let *genContext* be the running execution context.
-&nbsp;&nbsp;&nbsp;&nbsp;3.&nbsp;&nbsp;Return the value of the LastYieldValue component of *genContext* .
+*FunctionNext*&nbsp;:&nbsp;**new . target **<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;&nbsp;Assert:  the running execution context is a Generator Context.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;&nbsp;Let *genContext* be the running execution context.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;3.&nbsp;&nbsp;Return the value of the LastYieldValue component of *genContext* .<br>
 #### 25.3.3.1 GeneratorStart(generator, generatorBody)
 
 Between lines 3 and 4 of the ES6 algorithm add the following step:
