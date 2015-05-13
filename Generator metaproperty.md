@@ -68,9 +68,10 @@ The following are deltas to the ECMAScript 2015 Language Specification
 #### 8.3 Execution Contests
 The following row is added to **Table 24**:<br>
 
-|------------------|-------------------------------------------------------------------|<br>
-|   LastYieldValue  |  The value of the most recently evaluated *YieldExpression*  | <br>
-|------------------|-------------------------------------------------------------------|<br>
+| Component | Description   
+|------------------|-------------------------------------------------------------------
+|   LastYieldValue  |  The value of the most recently evaluated *YieldExpression*  
+
 #### 12.3 Left-Hand-Side Expression
 ##### Syntax
 
