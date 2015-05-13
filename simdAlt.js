@@ -54,7 +54,7 @@ export class Float32x4 {
    
    //selection Factories
    static select(laneSelector, trueValues, falseValues) {...}
-   static bitSelect(BitSelectionMask, trueValues, falseValues) {...}
+   static bitSelect(bitSelectionMask, trueValues, falseValues) {...}
    
    //from TypedArray factories
    static load(array, index) {...}
@@ -89,17 +89,17 @@ export class Float32x4 {
 
    //selection Factories
    static select(laneSelector, trueValues, falseValues) {...}
-   static bitSelect(BitSelectionMask, trueValues, falseValues) {...}
+   static bitSelect(bitSelectionMask, trueValues, falseValues) {...}
 
    // predicates
-   static check() {[[hasTag]](v, this) ? v : throw new TypeError}
+   static isFloat32x4() {[[hasTag]](this, "Float32x4Tag") ? v : throw new TypeError}
    
    // accessor methods
    extractLane(i) {...}
-   store(array, index, value) {...}
-   store1(array, index, value) {...}
-   store2(array, index, value) {...}
-   store3(array, index, value) {...}
+   store(array, index) {...}
+   store1(array, index) {...}
+   store2(array, index) {...}
+   store3(array, index) {...}
    
    //computational operations
    abs() {...}
