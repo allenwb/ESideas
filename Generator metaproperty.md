@@ -37,9 +37,7 @@ This proposal provides an alternative way to access the `next` parameter that wo
 #####Value and Context
 The value of `function.next` within the body of a Generator Function is the value passed to the generator by the `next` method that most recently resumed execution of the generator.  In particular,  referencing `function.next` prior to the first evaluation of a `yield` operator returns the argument value passed by the `next` call that started evaluation of the *GeneratorBody*. 
 
-`function.next` is  lexically scoped like `this` so it can be referenced from within an  Arrow Functions contained within a *GeneratorBody*.
-
-Referencing `function.next` outside of a *GeneratorBody*  or an Arrow Function contained in a *GeneratorBody* is a Syntax Error
+ `function.next` can appear anywhere a *YieldExpress* would be legal. Referencing `function.next` outside of a *GeneratorBody* is a Syntax Error. 
 #####Usage Example
 Here is how the above example might be rewritten using `function.next`
 ```js
