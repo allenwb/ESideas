@@ -1,6 +1,6 @@
 ## Generator function.next Meta Property ##
 Allen Wirfs-Brock  
-February 26, 2015
+May 13, 2015
 
 ### The Problem
 When the `next` method is invoked on a generator objects,  the value passed as the first argument to `next` becomes available to within the body of the generator function as the value of the `yield` expression that most recently suspended the generator function. This supports two-way communications between the a generator object and its consumer.
