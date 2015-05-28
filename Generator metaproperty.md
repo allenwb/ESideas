@@ -1,11 +1,11 @@
-## Generator function.next Meta Property ##
+## Generator function.sent Meta Property ##
 Allen Wirfs-Brock  
 May 13, 2015
 
 ### The Problem
-When the `next` method is invoked on a generator objects,  the value passed as the first argument to `next` becomes available to within the body of the generator function as the value of the `yield` expression that most recently suspended the generator function. This supports two-way communications between the a generator object and its consumer.
+When the `next` method is invoked on a generator objects,  the value passed as the first argument to `next` is "sent" to the generator object and becomes available  within the body of the generator function as the value of the `yield` expression that most recently suspended the generator function. This supports two-way communications between the a generator object and its consumer.
 
-However, the first `next` that a generator's consumer invokes to start a generator object does not correspond to any `yield` within the body of the generator function. Instead, the first `next` simply causes execution of the generator function body to  begin at the top of the body.
+However, the first `next` that a generator's consumer invokes to start a generator object does not correspond to any `yield` within the body of the generator function. Instead, the first `next` simply causes execution of the generator function body to begin at the top of the body.
 
 Because there the first `next` call does not correspond to a `yield` within the generator function body there is currently no way for the code with the body to access the initial `next` argument.  For example:
 
@@ -22,29 +22,29 @@ function *adder(total=0) {
 }
 
 let tally = adder();
-let first=tally.next(0.1); // argument will be ignored
+tally.next(0.1); // argument will be ignored
 tally.next(0.1);
 tally.next(0.1);
 let last=tally.next("done");
-console.log(last);  //1.2 instead of 0.3
+console.log(last.value);  //1.2 instead of 0.3
 ```
 In the above example, the argument to the `next` method  normally supplies the value to added to a running tally. Except that the increment value supplied to the first next is ignored.
 
 This proposal provides an alternative way to access the `next` parameter that works on the first and all subsequent invocations of a generator's `next` method.
 ### The Proposal
 
-###A new meta-property: `function.next`
+###A new meta-property: `function.sent`
 #####Value and Context
-The value of `function.next` within the body of a Generator Function is the value passed to the generator by the `next` method that most recently resumed execution of the generator.  In particular,  referencing `function.next` prior to the first evaluation of a `yield` operator returns the argument value passed by the `next` call that started evaluation of the *GeneratorBody*. 
+The value of `function.sent` within the body of a Generator Function is the value passed to the generator by the `next` method that most recently resumed execution of the generator.  In particular,  referencing `function.sent` prior to the first evaluation of a `yield` operator returns the argument value passed by the `next` call that started evaluation of the *GeneratorBody*. 
 
- `function.next` can appear anywhere a *YieldExpress* would be legal. Referencing `function.next` outside of a *GeneratorBody* is a Syntax Error. 
+ `function.sent` can appear anywhere a *YieldExpress* would be legal. Referencing `function.sent` outside of a *GeneratorBody* is a Syntax Error. 
 #####Usage Example
-Here is how the above example might be rewritten using `function.next`
+Here is how the above example might be rewritten using `function.sent`
 ```js
 function *adder(total=0) {
    let increment=1;
    do {
-       switch (request = function.next){
+       switch (request = function.sent){
           case undefined: break;
           case "done": return total;
           default: increment = Number(request);
@@ -54,11 +54,11 @@ function *adder(total=0) {
 }
 
 let tally = adder();
-let first=tally.next(0.1); // argument no longer ignored
+tally.next(0.1); // argument no longer ignored
 tally.next(0.1);
 tally.next(0.1);
 let last=tally.next("done");
-console.log(last);  //0.3
+console.log(last.value);  //0.3
 ```
 
 ###Specification Updates
@@ -80,14 +80,14 @@ The following row is added to **Table 24**:<br>
 
 *MetaProperty*<sub>[Yield]</sub> &nbsp;:  <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*NewTarget* <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [+Yield] *FunctionNext*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [+Yield] *FunctionSent*
 
 #### 14.4 Generator Function Definitions
 ##### Syntax
-*FunctionNext* &nbsp;: <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**function . next**
+*FunctionSent* &nbsp;: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**function . sent**
 #### 14.4.14 Evaluation
-*FunctionNext*&nbsp;:&nbsp;**function . next**<br>
+*FunctionSent*&nbsp;:&nbsp;**function . sent**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;&nbsp;Assert:  the running execution context is a Generator Context.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;&nbsp;Let *genContext* be the running execution context.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;3.&nbsp;&nbsp;Return the value of the LastYieldValue component of *genContext* .<br>
