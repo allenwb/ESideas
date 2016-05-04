@@ -13,6 +13,7 @@ Because there the first `next` call does not correspond to a `yield` within the 
 function *adder(total=0) {
    let increment=1;
    while (true) {
+       let request;
        switch (request = yield total += increment) {
           case undefined: break;
           case "done": return total;
@@ -44,6 +45,7 @@ Here is how the above example might be rewritten using `function.sent`
 function *adder(total=0) {
    let increment=1;
    do {
+       let request;
        switch (request = function.sent){
           case undefined: break;
           case "done": return total;
