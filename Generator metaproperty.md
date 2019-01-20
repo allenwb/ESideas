@@ -10,7 +10,7 @@ However, the first `next` that a generator's consumer invokes to start a generat
 Because there the first `next` call does not correspond to a `yield` within the generator function body there is currently no way for the code with the body to access the initial `next` argument.  For example:
 
 ```js
-function *adder(total=0) {
+function* adder(total=0) {
    let increment=1;
    while (true) {
        switch (request = yield total += increment) {
@@ -41,7 +41,7 @@ The value of `function.sent` within the body of a Generator Function is the valu
 #####Usage Example
 Here is how the above example might be rewritten using `function.sent`
 ```js
-function *adder(total=0) {
+function* adder(total=0) {
    let increment=1;
    do {
        switch (request = function.sent){
