@@ -5,7 +5,7 @@ February 26, 2015
 ### The Problem and Opportunity
 The ES community occasionally  identifies contextually variable run-time values that would be useful if they could be accessed from ES code. The problem is that we have had no common way to approach making such values available. The space of available keywords and operator symbols that might be associated with such values is severely limited.  Associating them with lexical bindings is also unattractive. The result, is that TC39 has steered away from adding support for  accessing such values.
 
-However, recently ES6 added the syntatic concept of a *MetaProperty*.  Syntactically a *MetaProperty* is a pre-existing reserved word followed by a period and then an *IdentifierName*.  For example: `for.sake`. The reserved word must be one that the ES grammar does not  permit to be otherwise immediately followed by a period.
+However, recently ES6 added the syntactic concept of a *MetaProperty*.  Syntactically a *MetaProperty* is a pre-existing reserved word followed by a period and then an *IdentifierName*.  For example: `for.sake`. The reserved word must be one that the ES grammar does not  permit to be otherwise immediately followed by a period.
 
 ES6 defined only one *MetaProperty*, `new.target`. However, this establishes a syntactic pattern that could be applied for accessing other contextually variable run-time values. For ES7 we should review the set of such values that we know about and considering adding additional meta properties for accessing them.
 ### Candidate Meta Properties
