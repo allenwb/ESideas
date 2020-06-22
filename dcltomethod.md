@@ -75,7 +75,7 @@ However, cloning a function creates other complications. Is the clone a deep or 
 The answer used in the ES6 draft version of `toMethod` was to perform a shallow clone of the function excluding  all own properties except for `length`. If any other properties needed to be included in the clone (either shallowly or deeply) it was up to caller to `toMethod` to take care of that copying after `toMethod` returned the clone to it. For this reason, the ES6 draft `toMethod` was best thought of as a primitive that was intended to be primarily used by mix-in libraries or other abstractions over objects.  Such libraries  would have needed to establish their own policies for dealing with the cloning issue and for dealing with various kinds of exotic function objects.
 
 Ultimately, TC39 decided that `toMethod` was too complex and error-prone.
-### Declarative Is Better 
+### Declarative Is Better
 As shown in the examples above, defining methods that reference `super` properties in class declarations  is simple and straightforward. This is also true for object literals such as:
 ```js
 let dog = {
@@ -110,7 +110,7 @@ aPusher mixin {
    }
  };
 ```
-###A Declarative Solution
+### A Declarative Solution
 In this solution, `mixin` is a contextual keyword that is the first token of a high precedence left-associative postfix operator. The second part of a `mixin`operator has the syntax of an object literal and all of the normal property definition forms are allowed within it except for `__proto__:`.  Note that the object literal is a integral part of the `mixin` postfix operator operator, not a separate sub expression. We call the value that the `mixin` operator is applied to the "augmented object".
 
 A simplified syntactic description of  the `mixin` operator is:    
@@ -122,7 +122,7 @@ The semantics are almost exactly the same as a regular object literal except tha
 Any methods within the `ObjectLiteral` that need a [[HomeObject]] binding are created with the augment object as their [[HomeObject]] value.  No method cloning is perform and a method with the "wrong" or `undefined` [[HomeObject]] never exists.
 
 **Note that it is a very important characteristic that this proposal that `mixin` is an operator**, rather than a function such as  `Object.mixin` which was considered for ES6. Use of an operator allows the new methods to be initially instantiated using the correct [[HomeObject]] values.  All function based approaches require initially instantiating functions with the wrong [[HomeObject]] values and this leads to the need to clone the functions.
-####But What If You Need Imperative Mixins?
+#### But What If You Need Imperative Mixins?
 The `mixin` operator solves the [[HomeObject]] binding problem by always defining the mixed-in methods at one place in a program so that the augmented object is available when the method function objects are instantiated. But what if you need to apply a mixin at many different places in a program? Just use procedural abstraction:
 ```es6
 //someMixin.js
@@ -139,7 +139,7 @@ let myObj = someMixin(new MyClass());
 someFunct(someMixin(anotherObj));
 //...
 ``` 
-####Augmenting Classes 
+#### Augmenting Classes
 The mixin operator can be applied to any object, including class objects and constructor functions:
 ```es6
 class C extends B{
@@ -177,9 +177,9 @@ C mixin class {
   static sm2() {super.sm2()};//[[HomeObject]] is C
 }
 ```
-###None Goals
+### Non-Goals
 This proposal is not intended to be a replacement for higher level class composition abstractions such as Traits.  Instead it provides the essential primitive language capabilities which combined with procedural or object abstraction capabilities can be used to define such higher level compositional abstractions.
-###BNF
+### BNF
 
 Here is the proposed BNF for this extension.
 

@@ -33,12 +33,14 @@ In the above example, the argument to the `next` method  normally supplies the v
 This proposal provides an alternative way to access the `next` parameter that works on the first and all subsequent invocations of a generator's `next` method.
 ### The Proposal
 
-###A new meta-property: `function.sent`
-#####Value and Context
+#### A new meta-property: `function.sent`
+
+##### Value and Context
 The value of `function.sent` within the body of a Generator Function is the value passed to the generator by the `next` method that most recently resumed execution of the generator.  In particular,  referencing `function.sent` prior to the first evaluation of a `yield` operator returns the argument value passed by the `next` call that started evaluation of the *GeneratorBody*. 
 
  `function.sent` can appear anywhere a *YieldExpress* would be legal. Referencing `function.sent` outside of a *GeneratorBody* is a Syntax Error. 
-#####Usage Example
+
+##### Usage Example
 Here is how the above example might be rewritten using `function.sent`
 ```js
 function *adder(total=0) {
@@ -61,7 +63,7 @@ let last=tally.next("done");
 console.log(last.value);  //0.3
 ```
 
-###Specification Updates
+### Specification Updates
 The following are deltas to the ECMAScript 2015 Language Specification
 #### 8.3 Execution Contests
 The following row is added to **Table 24**:<br>
